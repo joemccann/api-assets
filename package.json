@@ -1,0 +1,29 @@
+{
+  "name": "api-assets",
+  "version": "1.0.0",
+  "description": "🗃 An opinionated, standardized approach to obtaining assets from any cryptocurrency exchange from one REST-ful API.",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "standard",
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joemccann/api-assets.git"
+  },
+  "keywords": [],
+  "author": "Joe McCann",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/joemccann/api-assets/issues"
+  },
+  "homepage": "https://github.com/joemccann/api-assets#readme",
+  "dependencies": {
+    "binance-api-node": "^0.9.0",
+    "gdax": "^0.8.0"
+  },
+  "devDependencies": {
+    "standard": "^12.0.1",
+    "tape": "^4.10.1"
+  }
+}
