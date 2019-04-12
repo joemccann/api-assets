@@ -54,6 +54,22 @@ curl https://${DEFAULT_REGION}-${PROJECT}.cloudfunctions.net/api-assets?exchange
 curl https://${DEFAULT_REGION}-${PROJECT}.cloudfunctions.net/api-assets?exchange=Coinbase
 ```
 
+## DEPLOY
+
+First, fork or clone this repo, then:
+
+```sh
+npm i
+```
+
+Now, deploy it GCP, run the following command in the root of this repository:
+
+```sh
+gcloud functions deploy api-assets --runtime nodejs10 --trigger-http --memory 128MB
+```
+
+You should receive a YAML like response in your terminal including the URL for the Cloud Function.
+
 ## MOTIVATION
 
 In the cryptocurrency space, there are little to no standards for APIs or nomenclature.  Each exchange supports a different set of assets and the naming conventions are different across exchanges.
