@@ -4,13 +4,21 @@ const { 'api-assets': assets } = require('.')
 //
 // Create a stubbed response object
 //
-const res = {
-  send: (body) => {
-    return body
-  }
+
+function status (code) {
+  this.statusCode = code
+  return this
 }
 
-const { error } = console
+function send (obj) {
+  const body = { ...this, ...obj }
+  return body
+}
+
+const res = {
+  status,
+  send
+}
 
 test('sanity', t => {
   t.ok(true)
@@ -24,12 +32,7 @@ test('pass - fetch Binance assets', async t => {
     }
   }
 
-  const { err, data } = await assets(req, res)
-
-  if (err) {
-    error(err)
-    return t.end()
-  }
+  const { err, data, statusCode } = await assets(req, res)
 
   t.ok(!err)
   t.ok(data)
@@ -42,6 +45,8 @@ test('pass - fetch Binance assets', async t => {
     pair,
     quote
   } = testItem
+
+  t.equals(statusCode, 200)
 
   t.ok(testItem)
   t.ok(base)
@@ -58,12 +63,7 @@ test('pass - fetch Coinbase assets', async t => {
     }
   }
 
-  const { err, data } = await assets(req, res)
-
-  if (err) {
-    error(err)
-    return t.end()
-  }
+  const { err, data, statusCode } = await assets(req, res)
 
   t.ok(!err)
   t.ok(data)
@@ -76,6 +76,8 @@ test('pass - fetch Coinbase assets', async t => {
     pair,
     quote
   } = testItem
+
+  t.equals(statusCode, 200)
 
   t.ok(testItem)
   t.ok(base)
@@ -91,9 +93,10 @@ test('fail - fetch XXX assets ', async t => {
       exchange: 'XXX'
     }
   }
-  const { err, data } = await assets(req, res)
+  const { err, data, statusCode } = await assets(req, res)
   t.ok(!data)
   t.ok(err)
+  t.equals(statusCode, 404)
   t.equals(err, 'Exchange, XXX, is not supported.')
   t.end()
 })

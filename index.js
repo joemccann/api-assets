@@ -58,6 +58,6 @@ exports['api-assets'] = async (req, res) => {
   exchange = exchange.toUpperCase()
 
   const { err, data } = await fetchAssets(exchange)
-  if (err) return res.send({ err })
-  return res.send({ data })
+  if (err) return res.status(404).send({ err })
+  return res.status(200).send({ data })
 }
