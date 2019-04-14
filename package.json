@@ -1,6 +1,6 @@
 {
   "name": "api-assets",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "🗃 An opinionated, standardized approach to obtaining assets from any cryptocurrency exchange from one REST-ful API.",
   "main": "index.js",
   "scripts": {
