@@ -1,3 +1,5 @@
+
+const cors = require('cors-for-cloud-functions')
 const Binance = require('binance-api-node')
 const binance = Binance.default()
 const { PublicClient: Coinbase } = require('gdax')
@@ -45,7 +47,11 @@ const fetchAssets = async (exchange) => {
   } else return { err: `Exchange, ${exchange}, is not supported.` }
 }
 
-exports['api-assets'] = async (req, res) => {
+exports['api-assets'] = async (request, response) => {
+  const { req, res, isOptions } = cors(request, response)
+
+  if (isOptions) return res.status(204).send('')
+
   const {
     body,
     query
